@@ -18,26 +18,20 @@ console.log("The navigator's name is " + Kalvian_2);
 
 var lengthOfKalvian_1 = 0;
 var lengthOfKalvian_2 = 0;
-for (let i in Kalvian_1) {
-  a = a + 1;
+for (var i = 0; Kalvian_1[i] !== undefined; i++) {
+  lengthOfKalvian_1++;
 }
 
-for (let i in Kalvian_2) {
-  b = b + 1;
+for (var i = 0; Kalvian_2[i] !== undefined; i++) {
+  lengthOfKalvian_2++;
 }
 
 if (lengthOfKalvian_1 > lengthOfKalvian_2) {
-  console.log(
-    `The driver has the longest name, it has ${lengthOfKalvian_1} characters.`
-  );
+  console.log("The driver has the longest name, it has " + lengthOfKalvian_1 + " characters.");
 } else if (lengthOfKalvian_2 > lengthOfKalvian_1) {
-  console.log(
-    `The navigator has the longest name, it has ${lengthOfKalvian_2} characters.`
-  );
+  console.log("It seems that the navigator has the longest name, it has " + lengthOfKalvian_2 + " characters.");
 } else {
-  console.log(
-    `Wow, you both have equally long names, ${lengthOfKalvian_1} characters!.`
-  );
+  console.log("Wow, you both have equally long names, " + lengthOfKalvian_1 + " characters!");
 }
 
 // 2.2. Check if the string contains vowels or not.
@@ -69,77 +63,52 @@ if (havingVowels === true) {
 // - Print the number of upper case characters
 // - Print the number of lower case characters
 
-var Name = 'SurEnDHeR';
-var upperCase = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
-var lowerCase = [...'abcdefghijklmnopqrstuvwxyz'];
-var lengthOfUpperCaseInName = 0;
-var lengthOfLowerCaseInName = 0;
+var upperCaseCount = 0;
+var lowerCaseCount = 0;
 
-for (i of Name) {
-  for (let j of upperCase) {
-    if (i == j) {
-      lengthOfUpperCaseInName = lengthOfUpperCaseInName + 1;
-    }
+function countCaseCharacters(name) {
+  var upperCount = 0;
+  var lowerCount = 0;
+  for (var i = 0; name[i] !== undefined; i++) {
+      if (name[i] >= 'A' && name[i] <= 'Z') {
+          upperCount++;
+      } else if (name[i] >= 'a' && name[i] <= 'z') {
+          lowerCount++;
+      }
   }
-
-  for (let k of lengthOfLowerCaseInName) {
-    if (i == k) {
-      lengthOfLowerCaseInName = lengthOfLowerCaseInName + 1;
-    }
-  }
+  return [upperCount, lowerCount];
 }
 
-console.log(lengthOfUpperCaseInName);
-console.log(lengthOfLowerCaseInName);
+var result1 = countCaseCharacters(Kalvian_1);
+upperCaseCount += result1[0];
+lowerCaseCount += result1[1];
+
+console.log("Number of upper case characters: " + upperCaseCount);
+console.log("Number of lower case characters: " + lowerCaseCount);
 
 // Progression 3: Control Statements - 2
 // 3.1 Print all the characters of the driver's name, separated by a space and in capitals i.e. "Kalvian"
 
-var alphabets = {
-  a: 'A',
-  b: 'B',
-  c: 'C',
-  d: 'D',
-  e: 'E',
-  f: 'F',
-  g: 'G',
-  h: 'H',
-  i: 'I',
-  j: 'J',
-  k: 'K',
-  l: 'L',
-  m: 'M',
-  n: 'N',
-  o: 'O',
-  p: 'P',
-  q: 'Q',
-  r: 'R',
-  s: 'S',
-  t: 'T',
-  u: 'U',
-  v: 'V',
-  w: 'W',
-  x: 'X',
-  y: 'Y',
-  z: 'Z',
-};
-var output = '';
-for (let j of Kalvian_1) {
-  for (let i in alphabets) {
-    if (i == j) {
-      output = output.concat(alphabets[i], ' ');
-    }
+var result = "";
+
+for (var i = 0; Kalvian_1[i] !== undefined; i++) {
+  var char = Kalvian_1[i];
+  if (char >= 'a' && char <= 'z') {
+      char = String.fromCharCode(char.charCodeAt(0) - 32);
   }
+  result += char + " ";
 }
 
-console.log(output);
+console.log(result.trim());
 
 // 3.2 Print all the characters of the navigator's name, in reverse order. i.e. Example "naivlaK"
-var resverse = '';
-for (let i = lengthOfKalvian_2 - 1; i >= 0; i--) {
-  resverse = resverse.concat(Kalvian_2[i]);
+var reversedResult = "";
+
+for (var i = 0; Kalvian_2[i] !== undefined; i++) {
+    reversedResult = Kalvian_2[i] + reversedResult;
 }
-console.log(resverse);
+console.log(reversedResult);
+
 
 // 3.3 Merge both the characters such that driver is followed by Navigator like "DriverName NavigatorName"
 // - Now bring the NavigatorName to the start and send DriverName to the back like "NavigatorName DriverName"
@@ -150,12 +119,27 @@ console.log(`${Kalvian_2} ${Kalvian_1}`);
 // - The driver's name goes first.
 // - Yo, the navigator goes first definitely.
 // - What?! You both have the same name?
-if (Kalvian_1 > Kalvian_2) {
-  console.log("The driver's name goes first");
-} else if (Kalvian_2 > Kalvian_1) {
-  console.log('Yo, the navigator goes first definitely.');
+var comparisonResult = 0;
+for (var i = 0; Kalvian_1[i] !== undefined && Kalvian_2[i] !== undefined; i++) {
+  if (Kalvian_1[i] < Kalvian_2[i]) {
+      comparisonResult = -1;
+      break;
+  } else if (Kalvian_1[i] > Kalvian_2[i]) {
+      comparisonResult = 1;
+      break;
+  }
+}
+
+if (comparisonResult === 0 && Kalvian_1[i] !== Kalvian_2[i]) {
+  comparisonResult = Kalvian_1[i] === undefined ? -1 : 1;
+}
+
+if (comparisonResult === -1) {
+  console.log("The driver's name goes first.");
+} else if (comparisonResult === 1) {
+  console.log("Yo, the navigator goes first definitely.");
 } else {
-  console.log('What?! You both have the same name?');
+  console.log("What?! You both have the same name?");
 }
 // Bonus Time!
 // Bonus 1:
@@ -163,25 +147,34 @@ if (Kalvian_1 > Kalvian_2) {
 // Generate 3 paragraphs. Store the text in a variable type of string.
 // Make your program count the number of words in the string.
 // Make your program count the number of times the Latin word et appears.
-var paragraphs =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Hendrerit gravida rutrum quisque non. Et tortor at risus viverra adipiscing at in tellus. Sem fringilla ut morbi tincidunt augue interdum velit. Aliquet eget sit amet tellus cras adipiscing. Ornare arcu dui vivamus arcu. Sed sed risus pretium quam vulputate. Massa placerat duis ultricies lacus. Venenatis tellus in metus vulputate eu scelerisque. Ultrices sagittis orci a scelerisque purus semper eget. Tempor id eu nisl nunc. Praesent tristique magna sit amet purus gravida. Tortor pretium viverra suspendisse potenti nullam ac tortor. Consectetur adipiscing elit duis tristique sollicitudin. Nec feugiat nisl pretium fusce id velit ut tortor. Id leo in vitae turpis massa sed. Ornare aenean euismod elementum nisi quis eleifend quam. Condimentum vitae sapien pellentesque habitant. Id leo in vitae turpis massa sed elementum.     Fermentum odio eu feugiat pretium nibh ipsum consequat. Quam vulputate dignissim suspendisse in est ante in nibh. Sit amet facilisis magna etiam tempor orci eu. Euismod quis viverra nibh cras pulvinar mattis nunc sed. At tempor commodo ullamcorper a lacus vestibulum. Enim blandit volutpat maecenas volutpat blandit aliquam. Purus faucibus ornare suspendisse sed nisi lacus sed viverra. Morbi non arcu risus quis. Habitant morbi tristique senectus et. Enim diam vulputate ut pharetra sit amet. Nisi vitae suscipit tellus mauris. Habitant morbi tristique senectus et netus. Tortor pretium viverra suspendisse potenti. Ipsum nunc aliquet bibendum enim facilisis gravida. Sapien eget mi proin sed. Orci phasellus egestas tellus rutrum tellus pellentesque eu.  Egestas maecenas pharetra convallis posuere morbi leo urna. Lorem ipsum dolor sit amet consectetur adipiscing elit ut. At tellus at urna condimentum mattis pellentesque id nibh tortor. Ipsum faucibus vitae aliquet nec. Cursus vitae congue mauris rhoncus. Et netus et malesuada fames. Elementum sagittis vitae et leo duis ut diam quam. Ut etiam sit amet nisl purus in. Donec pretium vulputate sapien nec. Sed id semper risus in. Nam at lectus urna duis convallis. Massa massa ultricies mi quis hendrerit dolor magna eget est. Massa tincidunt nunc pulvinar sapien et. Consectetur adipiscing elit duis tristique. Viverra accumsan in nisl nisi scelerisque eu ultrices vitae. Posuere morbi leo urna molestie. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper. Morbi tristique senectus et netus et malesuada. Aliquet sagittis id consectetur purus ut faucibus pulvinar.';
 
-var words = 0;
-for (let space of paragraphs) {
-  if (space == ' ') {
-    words = words + 1;
-  }
-}
-console.log(words);
+var loremIpsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.
+Etiam facilisis. Nunc elementum fermentum wisi. Aenean placerat. Ut imperdiet, enim sed gravida sollicitudin, felis odio placerat quam, ac pulvinar elit odio et sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Pellentesque adipiscing eros ut libero. Ut condimentum mi vel tellus. Suspendisse et enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam posuere imperdiet velit. Suspendisse potenti. Sed pulvinar ullamcorper metus. Integer viverra odio sit amet nulla.`;
 
-var count = 0;
-paragraphs = paragraphs.split(' ');
-for (let i of paragraphs) {
-  if (i.toLowerCase() === 'et') {
-    count = count + 1;
-  }
+var wordCount = 0;
+var inWord = false;
+
+for (var i = 0; loremIpsum[i] !== undefined; i++) {
+    var char = loremIpsum[i];
+    if (char === ' ' || char === '\n' || char === '\t' || char === '.' || char === ',') {
+        inWord = false;
+    } else if (!inWord) {
+        inWord = true;
+        wordCount++;
+    }
 }
-console.log(count);
+
+var etCount = 0;
+for (var i = 0; loremIpsum[i] !== undefined; i++) {
+    if (loremIpsum[i] === 'e' && loremIpsum[i+1] === 't' && 
+        (loremIpsum[i+2] === ' ' || loremIpsum[i+2] === '.' || loremIpsum[i+2] === ',' || loremIpsum[i+2] === undefined)) {
+        etCount++;
+    }
+}
+
+console.log("Number of words: " + wordCount);
+console.log("Number of times 'et' appears: " + etCount);
 
 // Bonus 2:
 // Create a new variable phraseToCheck and have it contain some string value. Write a code that will check if the value we assigned to this variable is a Palindrome. Here are some examples of palindromes:
@@ -197,27 +190,30 @@ console.log(count);
 
 // Hint: If you use Google to help you to find solution to this iteration, you might run into some solutions that use advanced string or array methods (such as join(), reverse(), etc.). However, try to apply the knowledge you currently have since you can build pretty nice solution with just using for loop, if-else statements with some break and continue... Just sayin'
 
-function isPalindrome(str) {
-  var Str = str.toLowerCase();
+var phraseToCheck = "A man, a plan, a canal, Panama!";  // Replace with any phrase to check
 
-  for (var i = 0, j = Str.length - 1; i < j; i++, j--) {
-    while (!/[a-zA-Z0-9]/.test(Str[i])) {
-      i++;
+var cleanedPhrase = "";
+for (var i = 0; phraseToCheck[i] !== undefined; i++) {
+    var char = phraseToCheck[i].toLowerCase();
+    if ((char >= 'a' && char <= 'z') || (char >= '0' && char <= '9')) {
+        cleanedPhrase += char;
     }
-
-    while (!/[a-zA-Z0-9]/.test(Str[j])) {
-      j--;
-    }
-
-    if (Str[i] !== Str[j]) {
-      return false;
-    }
-  }
-  return true;
 }
 
-var phraseToCheck = 'A man, a plan, a canal, Panama!';
-var isPalindromeResult = isPalindrome(phraseToCheck);
-console.log(
-  `The phrase "${phraseToCheck}" is a palindrome: ${isPalindromeResult}`
-);
+var isPalindrome = true;
+var length = 0;
+for (var i = 0; cleanedPhrase[i] !== undefined; i++) {
+    length++;
+}
+for (var i = 0; i < length / 2; i++) {
+    if (cleanedPhrase[i] !== cleanedPhrase[length - 1 - i]) {
+        isPalindrome = false;
+        break;
+    }
+}
+
+if (isPalindrome) {
+    console.log("The phrase is a palindrome.");
+} else {
+    console.log("The phrase is not a palindrome.");
+}
